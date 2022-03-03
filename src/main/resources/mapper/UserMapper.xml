@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyl.library.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.xyl.library.entity.User">
+        <id column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="user_pwd" jdbcType="VARCHAR" property="userPwd"/>
+        <result column="user_email" jdbcType="VARCHAR" property="userEmail"/>
+    </resultMap>
+    <!-- 分页查询用户-->
+    <select id="selectByPageNum" resultMap="BaseResultMap">
+        select *
+        from user
+        limit #{currIndex},#{pageSize}
+    </select>
+
+    <select id="selectUserCount" resultType="Integer">
+        select count(*)
+        from user
+    </select>
+</mapper>

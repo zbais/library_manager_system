@@ -1,0 +1,33 @@
+server:
+  port: 8885
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/libraryms?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=GMT
+    username: root
+    password: longfire
+  mvc:
+    view:
+      prefix: classpath:/templates/
+      suffix: .html
+  resources:
+    chain:
+      cache: true
+  devtools:
+    livereload:
+      port: 35732
+  thymeleaf:
+    cache: false
+    encoding: utf-8
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.xyl.library.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+#防类重名
+logging:
+  level:
+    springfox: error

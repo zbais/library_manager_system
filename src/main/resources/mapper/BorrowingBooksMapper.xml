@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyl.library.mapper.BorrowingBooksMapper">
+    <resultMap id="BaseResultMap" type="com.xyl.library.entity.BorrowingBooks">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="book_id" jdbcType="INTEGER" property="bookId"/>
+        <result column="date" jdbcType="DATE" property="date"/>
+    </resultMap>
+    <!--查询用户的所有借书记录-->
+    <select id="selectAllBorrowRecord" resultMap="BaseResultMap">
+        select *
+        from borrowingbooks
+        where user_id = #{userId}
+        order by `date`;
+    </select>
+
+    <!-- 查询该userId用户的总借书记录数目-->
+    <select id="selectAllRecordCount" resultType="Integer">
+        select count(*)
+        from borrowingbooks
+        where user_id = #{userId}
+    </select>
+
+    <select id="selectAllByPage" resultMap="BaseResultMap">
+        select *
+        from borrowingbooks
+        limit #{currIndex},#{pageSize}
+    </select>
+
+    <select id="selectAll" resultType="Integer">
+        select count(*)
+        from borrowingbooks
+    </select>
+</mapper>

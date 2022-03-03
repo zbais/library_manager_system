@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xyl.library.mapper.BookMapper">
+    <resultMap id="BaseResultMap" type="com.xyl.library.entity.Book">
+        <id column="book_id" jdbcType="INTEGER" property="bookId"/>
+        <result column="book_name" jdbcType="VARCHAR" property="bookName"/>
+        <result column="book_author" jdbcType="VARCHAR" property="bookAuthor"/>
+        <result column="book_publish" jdbcType="VARCHAR" property="bookPublish"/>
+        <result column="book_category" jdbcType="INTEGER" property="bookCategory"/>
+        <result column="book_price" jdbcType="DOUBLE" property="bookPrice"/>
+        <result column="book_introduction" jdbcType="VARCHAR" property="bookIntroduction"/>
+    </resultMap>
+
+    <!-- 根据书籍类别 分页查找-->
+    <select id="selectByCategoryId" resultMap="BaseResultMap">
+        select *
+        from book
+        where book_category = #{categoryId}
+        limit #{currIndex},#{pageSize}
+    </select>
+
+    <select id="selectBookCountByCategoryId" resultType="Integer">
+        select count(*)
+        from book
+        where book_category = #{categoryId}
+    </select>
+
+</mapper>
